@@ -1,0 +1,68 @@
+
+EXPERIMENT-2
+
+file name: users.xml
+<?xml version="1.0"?>
+<users>
+    <user id="1" name="Alice" email="alice@example.com"/>
+    <user id="2" name="Bob" email="bob@example.com"/>
+    <user id="3" name="Charlie" email="charlie@example.com"/>
+    <user id="4" name="David" email="david@example.com"/>
+    <user id="5" name="Emma" email="emma@example.com"/>
+    <user id="6" name="Frank" email="frank@example.com"/>
+    <user id="7" name="Grace" email="grace@example.com"/>
+    <user id="8" name="Harry" email="harry@example.com"/>
+    <user id="9" name="Isabella" email="isabella@example.com"/>
+    <user id="10" name="John" email="john@example.com"/>
+</users>
+
+File name: read_user.php
+<?php
+$userId = $_GET['id'] ?? '';
+if ($userId == '') {
+    echo "Please give user id like: read_user.php?id=3";
+    exit;
+}
+$xml = simplexml_load_file("users.xml");
+$found = false;
+foreach ($xml->user as $user) {
+    if ((string)$user['id'] === $userId) {
+        echo "User Details:<br>";
+        echo "ID: " . $user['id'] . "<br>";
+        echo "Name: " . $user['name'] . "<br>";
+        echo "Email: " . $user['email'] . "<br>";
+        $found = true;
+        break;
+    }
+}
+if (!$found) {
+    echo "User not found!";
+}
+?>
+
+
+EXPERIMENT-3
+
+<!DOCTYPE html>
+<html>
+<body>
+<form method="post">
+    Enter first array (comma separated): <br>
+    <input type="text" name="a"><br><br>
+    Enter second array (comma separated): <br>
+    <input type="text" name="b"><br><br>
+    <input type="submit" value="Merge & Sort">
+</form>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $arr1 = array_map('intval', explode(',', $_POST['a']));
+    $arr2 = array_map('intval', explode(',', $_POST['b']));
+    $merged = array_merge($arr1, $arr2);
+    rsort($merged);
+    echo "<pre>";
+    print_r($merged);
+    echo "</pre>";
+}
+?>
+</body>
+</html>
