@@ -1,5 +1,5 @@
 
-EXPERIMENT-2
+EXPERIMENT - 2
 
 file name: users.xml
 <?xml version="1.0"?>
@@ -17,6 +17,7 @@ file name: users.xml
 </users>
 
 File name: read_user.php
+
 <?php
 $userId = $_GET['id'] ?? '';
 if ($userId == '') {
@@ -41,7 +42,11 @@ if (!$found) {
 ?>
 
 
-EXPERIMENT-3
+
+
+
+
+EXPERIMENT - 3
 
 <!DOCTYPE html>
 <html>
@@ -66,3 +71,93 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 </body>
 </html>
+
+
+
+
+
+EXPERIMENT - 4
+
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $source = $_POST['source'];
+    $destination = $_POST['destination'];
+    if (!file_exists($source)) {
+        echo "<p style='color:red;'>Source file does not exist!</p>";
+    } else {
+        $content = file_get_contents($source);
+        file_put_contents($destination, $content);
+        echo "<p style='color:green;'>Data copied successfully from $source to $destination</p>";
+    }
+}
+?>
+<form method="post" action="">
+    <h3>Copy File Content</h3>
+    Enter source file name: <input type="text" name="source" required><br><br>
+    Enter destination file name: <input type="text" name="destination" required><br><br>
+    <input type="submit" value="Copy">
+</form>
+</body>
+</html>
+
+
+
+
+
+
+EXPERIMENT - 5
+
+<?php
+echo "Prime numbers between 1 and 50 are: ";
+for ($num = 2; $num <= 50; $num++) {
+    $isPrime = true;
+    for ($i = 2; $i <= sqrt($num); $i++) {
+        if ($num % $i == 0) {
+            $isPrime = false;
+            break;
+        }
+    }
+    if ($isPrime) {
+        echo $num . " ";
+    }
+}
+?>
+
+
+
+
+
+
+EXPERIMENT - 7
+
+<!DOCTYPE html>
+<html>
+<body>
+<form method="post">
+    Enter a sentence: <input type="text" name="sentence" required><br><br>
+    Enter a word to search: <input type="text" name="search" required><br><br>
+    <input type="submit" value="Check">
+</form>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $str = $_POST['sentence'];
+    $search = $_POST['search'];
+    echo "<h3>Results:</h3>";
+    echo "a) Length of string: " . strlen($str) . "<br>";
+    echo "b) Number of words: " . str_word_count($str) . "<br>";
+    echo "c) Reverse string: " . strrev($str) . "<br>";
+    if (strpos($str, $search) !== false) {
+        echo "d) The word '$search' was found in the string.";
+    } else {
+        echo "d) The word '$search' was NOT found in the string.";
+    }
+}
+?>
+</body>
+</html>
+
+
+
