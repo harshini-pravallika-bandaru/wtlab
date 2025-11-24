@@ -46,6 +46,8 @@ if (!$found) {
 
 
 
+
+
 EXPERIMENT - 3
 
 <!DOCTYPE html>
@@ -71,6 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 </body>
 </html>
+
+
 
 
 
@@ -108,6 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
+
+
 EXPERIMENT - 5
 
 <?php
@@ -125,6 +131,7 @@ for ($num = 2; $num <= 50; $num++) {
     }
 }
 ?>
+
 
 
 
@@ -161,3 +168,132 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
+
+
+
+
+
+SIMPLE CALCULATOR EXTRA CODE - 1:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+</head>
+<body>
+<h2>PHP Simple Calculator</h2>
+<form method="post">
+    <input type="number" name="num1" step="any" required>
+    <input type="number" name="num2" step="any" required>
+    <br><br>
+    <button name="op" value="+">+</button>
+    <button name="op" value="-">-</button>
+    <button name="op" value=""></button>
+    <button name="op" value="/">/</button>
+    <button name="op" value="%">%</button>
+</form>
+<h3>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $a = $_POST['num1'];
+    $b = $_POST['num2'];
+    $op = $_POST['op'];
+    switch ($op) {
+        case '+':
+            echo "Result: " . ($a + $b);
+            break;
+        case '-':
+            echo "Result: " . ($a - $b);
+            break;
+        case '*':
+            echo "Result: " . ($a * $b);
+            break;
+        case '/':
+            echo ($b != 0) ? "Result: " . ($a / $b) : "Cannot divide by zero!";
+            break;
+        case '%':
+            echo "Result: " . ($a % $b);
+            break;
+    }
+}
+?>
+</h3>
+</body>
+</html>
+
+
+
+
+
+
+
+
+WELCOME PAGE EXTRA CODE - 2
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome Page</title>
+</head>
+<body>
+
+<?php
+echo "<h1>Welcome to my website!</h1>";
+?>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+EVEN OR ODD EXTRA CODE - 3
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Enter a number: <input type="number" name="num">
+    <button type="submit">Check</button>
+</form>
+
+<?php
+if (isset($_POST['num'])) {
+    $number = $_POST['num'];
+    if ($number % 2 == 0) {
+        echo "<h3>$number is Even</h3>";
+    } else {
+        echo "<h3>$number is Odd</h3>";
+    }
+}
+?>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+BIGGEST OF 3 NUMBERS EXTRA CODE - 4
+
+<?php
+$a = 10;
+$b = 20;
+$c = 15;
+if ($a > $b && $a > $c) {
+    echo "The biggest number is: $a";
+} elseif ($b > $a && $b > $c) {
+    echo "The biggest number is: $b";
+} else {
+    echo "The biggest number is: $c";
+}
+?>
