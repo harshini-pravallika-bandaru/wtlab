@@ -18,28 +18,42 @@ file name: users.xml
 
 File name: read_user.php
 
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Enter User ID: <input type="number" name="id" required>
+    <button type="submit">Search</button>
+</form>
+
 <?php
-$userId = $_GET['id'] ?? '';
-if ($userId == '') {
-    echo "Please give user id like: read_user.php?id=3";
-    exit;
-}
-$xml = simplexml_load_file("users.xml");
-$found = false;
-foreach ($xml->user as $user) {
-    if ((string)$user['id'] === $userId) {
-        echo "User Details:<br>";
-        echo "ID: " . $user['id'] . "<br>";
-        echo "Name: " . $user['name'] . "<br>";
-        echo "Email: " . $user['email'] . "<br>";
-        $found = true;
-        break;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $userId = $_POST['id'] ?? '';
+
+    $xml = simplexml_load_file("users.xml");
+    $found = false;
+
+    foreach ($xml->user as $user) {
+        if ((string)$user['id'] === $userId) {
+            echo "<h3>User Details:</h3>";
+            echo "ID: " . $user['id'] . "<br>";
+            echo "Name: " . $user['name'] . "<br>";
+            echo "Email: " . $user['email'] . "<br>";
+            $found = true;
+            break;
+        }
+    }
+
+    if (!$found) {
+        echo "User not found!";
     }
 }
-if (!$found) {
-    echo "User not found!";
-}
 ?>
+
+</body>
+</html>
 
 
 
@@ -173,6 +187,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
+
+EXPERIMENT - 10
+
+<!DOCTYPE html>
+<html>
+<body>
+<div id="box" style="
+    width:150px; height:150px; background:red;
+    margin:100px auto; cursor:pointer;
+    transition:0.4s;
+"></div>
+<script>
+let shape = true;
+const box = document.getElementById("box");
+box.onclick = () => {
+    const size = Math.random()*150 + 50;
+    box.style.background = "#" + ((Math.random()*0xFFFFFF)<<0).toString(16);
+    box.style.width = box.style.height = size + "px";
+    box.style.borderRadius = shape ? "50%" : "0%";
+    shape = !shape;
+};
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
 SIMPLE CALCULATOR EXTRA CODE - 1:
 
 <!DOCTYPE html>
@@ -285,15 +332,33 @@ if (isset($_POST['num'])) {
 
 BIGGEST OF 3 NUMBERS EXTRA CODE - 4
 
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Enter A: <input type="number" name="a" required><br><br>
+    Enter B: <input type="number" name="b" required><br><br>
+    Enter C: <input type="number" name="c" required><br><br>
+    <button type="submit">Find Biggest</button>
+</form>
+
 <?php
-$a = 10;
-$b = 20;
-$c = 15;
-if ($a > $b && $a > $c) {
-    echo "The biggest number is: $a";
-} elseif ($b > $a && $b > $c) {
-    echo "The biggest number is: $b";
-} else {
-    echo "The biggest number is: $c";
+if (isset($_POST['a']) && isset($_POST['b']) && isset($_POST['c'])) {
+
+    $a = $_POST['a'];
+    $b = $_POST['b'];
+    $c = $_POST['c'];
+
+    if ($a > $b && $a > $c) {
+        echo "<h3>The biggest number is: $a</h3>";
+    } elseif ($b > $a && $b > $c) {
+        echo "<h3>The biggest number is: $b</h3>";
+    } else {
+        echo "<h3>The biggest number is: $c</h3>";
+    }
 }
 ?>
+
+</body>
+</html>
